@@ -424,6 +424,13 @@ static void anticollision_completed(const struct st25r3911b_nfca_tag_info *tag_i
 
 	if (tag_info->type == ST25R3911B_NFCA_TAG_TYPE_T2T) {
 		printk("Type 2 Tag.\n");
+		uint8_t i = 0;
+		printk("Tag info: ");
+		for(i=0; i<tag_info->nfcid1_len; i++)
+		{
+			printk("%x", tag_info->nfcid1[i]);
+		}
+		printk("\n");
 
 		tag_type = NFC_TAG_TYPE_T2T;
 
@@ -682,10 +689,16 @@ static const struct nfc_t4t_hl_procedure_cb t4t_hl_procedure_cb = {
 	.ndef_read = t4t_hl_ndef_read
 };
 
+void delay(uint32_t delay)
+{
+	volatile uint32_t _delay = delay;
+	while(--_delay);
+}
+
 void main(void)
 {
+	delay(640000);
 	int err;
-
 	printk("Starting NFC TAG Reader example\n");
 	nfc_t4t_hl_procedure_cb_register(&t4t_hl_procedure_cb);
 

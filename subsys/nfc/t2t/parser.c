@@ -583,29 +583,29 @@ void nfc_t2t_printout(const struct nfc_t2t *t2t)
 	LOG_INF("Type 2 Tag contents:");
 	LOG_INF("Number of TLV blocks: %d", t2t->tlv_count);
 
-	LOG_DBG("Internal data:");
-	LOG_DBG("    Manufacturer ID:      0x%02x",
+	LOG_INF("Internal data:");
+	LOG_INF("    Manufacturer ID:      0x%02x",
 		t2t->sn.manufacturer_id);
-	LOG_DBG("    Serial number part 1: 0x%04x",
+	LOG_INF("    Serial number part 1: 0x%04x",
 		t2t->sn.serial_number_part_1);
-	LOG_DBG("    Check byte 0:         0x%02x",
+	LOG_INF("    Check byte 0:         0x%02x",
 		t2t->sn.check_byte_0);
-	LOG_DBG("    Serial number part 2: 0x%08x",
+	LOG_INF("    Serial number part 2: 0x%08x",
 		t2t->sn.serial_number_part_2);
-	LOG_DBG("    Check byte 1:         0x%02x",
+	LOG_INF("    Check byte 1:         0x%02x",
 		t2t->sn.check_byte_1);
-	LOG_DBG("    Internal byte:        0x%02x",
+	LOG_INF("    Internal byte:        0x%02x",
 		t2t->sn.internal);
-	LOG_DBG("    Lock bytes:           0x%04x",
+	LOG_INF("    Lock bytes:           0x%04x",
 		t2t->lock_bytes);
 
-	LOG_DBG("Capability Container data:");
-	LOG_DBG("    Major version number: %d", t2t->cc.major_version);
-	LOG_DBG("    Minor version number: %d", t2t->cc.minor_version);
-	LOG_DBG("    Data area size:       %d", t2t->cc.data_area_size);
-	LOG_DBG("    Read access:          0x%02X",
+	LOG_INF("Capability Container data:");
+	LOG_INF("    Major version number: %d", t2t->cc.major_version);
+	LOG_INF("    Minor version number: %d", t2t->cc.minor_version);
+	LOG_INF("    Data area size:       %d", t2t->cc.data_area_size);
+	LOG_INF("    Read access:          0x%02X",
 		t2t->cc.read_access);
-	LOG_DBG("    Write access:         0x%02X",
+	LOG_INF("    Write access:         0x%02X",
 		t2t->cc.write_access);
 
 	for (size_t i = 0; i < t2t->tlv_count; i++) {
@@ -638,8 +638,8 @@ void nfc_t2t_printout(const struct nfc_t2t *t2t)
 		LOG_INF("    Data length: %d", t2t->tlv_block_array[i].length);
 
 		if (t2t->tlv_block_array[i].length > 0) {
-			LOG_DBG(" Data:");
-			LOG_HEXDUMP_DBG(t2t->tlv_block_array[i].value,
+			LOG_INF(" Data:");
+			LOG_HEXDUMP_INF(t2t->tlv_block_array[i].value,
 					t2t->tlv_block_array[i].length,
 					"Data: ");
 		}
